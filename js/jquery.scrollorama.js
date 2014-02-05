@@ -408,7 +408,27 @@
 		};
 		
 		init();
-		
+
+		scrollorama.settings.blocks.find('*[data-animate]').each(
+			function() {
+				var element = $(this);
+				if ($.trim(element.attr('data-animate')).toLowerCase() === 'true') {
+					scrollorama.animate(
+						element,
+						{
+							duration: element.attr('data-duration') ? parseInt(element.attr('data-duration')) : undefined,
+							delay: element.attr('data-delay') ? parseInt(element.attr('data-delay')) : undefined,
+							property: element.attr('data-property'),
+							start: element.attr('data-start') ? (isNaN(element.attr('data-start')) ? element.attr('data-start') : parseInt(element.attr('data-start'))) : undefined,
+							end: element.attr('data-end') ? (isNaN(element.attr('data-end')) ? element.attr('data-end') : parseInt(element.attr('data-end'))) : undefined,
+							pin: element.attr('data-pin') ? (($.trim(element.attr('data-pin').toLowerCase()) === 'true') ? true : false) : undefined,
+							easing: element.attr('data-easing')
+						}
+					);
+				}
+			}
+		);
+
 		return scrollorama;
     };
 
